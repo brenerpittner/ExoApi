@@ -14,7 +14,7 @@ namespace ExoApi.Contexts
         {
             if(!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Data Source = MYMAX\\SQLEXPRESS; initial catalog = dbExoApi; User Id = aluno; Password = aluno1234"); //User Id = aluno; Password = aluno1234" //Integrated Security = true
+                optionsBuilder.UseSqlServer("Data Source = MYMAX\\SQLEXPRESS; initial catalog = dbExoApi; Integrated Security = true"); //User Id = aluno; Password = aluno1234" //Integrated Security = true
             }
 
         }
