@@ -1,12 +1,24 @@
 using ExoApi.Contexts;
+using ExoApi.Interfaces;
 using ExoApi.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// Adicionra cors para acesssar a API fora do domínio 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("CorsPolicy", builder =>
+    {
+        builder.WithOrigins("http://localhost:3000")
+        .AllowAnyHeader()
+        .AllowAnyMethod();
+    });
+});
 
+// Add services to the container.
 builder.Services.AddScoped<dbExoAPIContext, dbExoAPIContext>();
 builder.Services.AddScoped<ProjetoRepository, ProjetoRepository>();
+builder.Services.AddTransient<IUsuarioRepository, UsuarioRepository>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -23,6 +35,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors("CorsPolicy");
 
 app.UseAuthorization();
 
